@@ -1,0 +1,106 @@
+/* ===========================
+   CyberGuardian — style.css
+   Neon cyber UI
+=========================== */
+
+:root {
+  --bg: #05060d;
+  --panel: #0b0e19;
+  --fg: #e6f3ff;
+  --muted: #92a4bc;
+  --primary: #00eaff;
+  --accent: #ff48e8;
+  --glow: 0 0 14px rgba(0,234,255,0.6), 0 0 32px rgba(255,72,232,0.35);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* Layout */
+.wrap {
+  max-width: 900px;
+  margin: auto;
+  padding: 14px 18px;
+}
+.row {
+  display: flex;
+  gap: 8px;
+}
+.row.between { justify-content: space-between; }
+.center { text-align: center; }
+
+/* Header */
+header {
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
+}
+h1 { font-size: 20px; }
+.cyber {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Neon buttons */
+.btn {
+  padding: 10px 18px;
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--primary);
+  cursor: pointer;
+  box-shadow: var(--glow);
+}
+.btn:hover { filter: brightness(1.25); }
+.btn.secondary { border-color: var(--accent); color: var(--accent); }
+.btn.ghost { border: none; box-shadow: none; }
+
+/* Cards (pytania) */
+.card {
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: var(--glow);
+}
+.question-text {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Odpowiedzi */
+.answers {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.answers button {
+  font-size: 16px;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+/* Wynik */
+#screen-result h2 {
+  font-size: 28px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Stopka */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 12px;
+  opacity: 0.6;
+}
