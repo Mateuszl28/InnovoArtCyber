@@ -1,135 +1,101 @@
 /* ===========================
    CyberGuardian — style.css
-   Cyberpunk neon + glitch
+   Cyberpunk neon + glitch + art poster style
 =========================== */
 
-:root {
-  --bg: #04060d;
-  --panel: #0b0e19;
-  --fg: #e6f3ff;
-  --muted: #92a4bc;
-  --primary: #00eaff;
-  --accent: #ff48e8;
-  --good: #7CFFDB;
-  --bad: #FF5F6D;
-  --glow: 0 0 14px rgba(0,234,255,0.6), 0 0 32px rgba(255,72,232,0.35);
+:root{
+  --bg:#04060d;
+  --panel:#0b0e18;
+  --fg:#e6f3ff;
+  --muted:#9aaec5;
+  --primary:#00eaff;
+  --accent:#ff48e8;
+  --good:#7CFFDB;
+  --bad:#FF5F6D;
+  --glow:0 0 14px rgba(0,234,255,0.55),0 0 32px rgba(255,72,232,0.28);
+  --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color:var(--fg);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
 }
 
-* { box-sizing: border-box; user-select: none; }
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Inter, sans-serif;
-  color: var(--fg);
-  background: var(--bg);
-  overflow-x: hidden;
-}
-
-/* Background generative visual */
-#bg-art {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  filter: blur(2px);
-}
+/* Background canvas sits behind everything */
+#bg-art{position:fixed;inset:0;z-index:-2;filter:blur(2px)}
 
 /* Layout */
-.wrap { max-width: 900px; margin: auto; padding: 14px 18px; }
-.row { display: flex; gap: 8px; }
-.center { text-align: center; }
-.row.between { justify-content: space-between; }
+.wrap{max-width:1100px;margin:0 auto;padding:18px}
+.row{display:flex;gap:8px;align-items:center}
+.row.between{justify-content:space-between}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.gap8{gap:8px}
 
 /* Header */
-header {
-  backdrop-filter: blur(7px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  position: sticky;
-  top: 0;
-}
-.cyber {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  color: transparent;
-}
+header{position:sticky;top:0;backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(4,6,13,0.6), transparent)}
+h1{margin:0;font-size:18px}
+.cyber{background:linear-gradient(90deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* Buttons */
-.btn {
-  padding: 12px 20px;
-  border: 2px solid var(--primary);
-  border-radius: 12px;
-  background: transparent;
-  color: var(--primary);
-  cursor: pointer;
-  box-shadow: var(--glow);
-}
-.btn:hover { filter: brightness(1.25); }
-.btn.secondary { border-color: var(--accent); color: var(--accent); }
+.btn{padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--primary);cursor:pointer;box-shadow:var(--glow)}
+.btn:hover{filter:brightness(1.15)}
+.btn.secondary{border-color:var(--accent);color:var(--accent)}
+.btn.ghost{background:transparent;box-shadow:none;border:1px dashed rgba(255,255,255,0.04);color:var(--muted)}
 
-/* Card with glitch */
-.card {
-  background: var(--panel);
-  border-radius: 16px;
-  padding: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: var(--glow);
-}
-.question-text { font-size: 22px; font-weight: 600; }
+/* Menu grid */
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+.mode-btn{padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg,rgba(11,14,25,0.6),rgba(8,10,18,0.6));font-weight:600;cursor:pointer;box-shadow:var(--glow)}
 
-/* Glitch effect */
-.glitch-card {
-  animation: glitch 3s infinite;
-}
-@keyframes glitch {
-  0% { transform: skew(0deg); }
-  30% { transform: skew(0.8deg); }
-  50% { transform: skew(-0.8deg); }
-  100% { transform: skew(0deg); }
-}
+/* Card */
+.card{background:linear-gradient(180deg,var(--panel),rgba(11,14,25,0.9));border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.06);box-shadow:var(--glow)}
+.question-text{font-size:20px;font-weight:600}
 
 /* Answers */
-.answers {
-  margin-top: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.answers button {
-  font-size: 16px;
-  padding: 14px;
-  border-radius: 12px;
+.answers{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.answers button{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.2);text-align:left}
+
+/* Glitch effect */
+.glitch-card{animation:glitch 4s infinite}
+@keyframes glitch{
+  0%{transform:none}
+  28%{transform:skewX(.6deg)}
+  56%{transform:skewX(-.6deg)}
+  100%{transform:none}
 }
 
 /* Progress bar */
-.progress {
-  width: 100%;
-  height: 10px;
-  background: #111;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: 16px;
-}
-#progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  transition: width 0.4s ease-out;
-}
+.progress{height:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border-radius:999px;overflow:hidden;margin:12px 0}
+#progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .4s}
 
-/* Fade in for smooth transitions */
-.fade-in { animation: fadeIn 1s ease-in; }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px);}
-  to { opacity: 1; transform: translateY(0);}
-}
+/* Spot the Phish */
+.spot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:12px}
+.spot-card{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+
+/* Password forge */
+input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--fg);width:100%}
+.pwd-strength{margin-top:8px;font-weight:600}
 
 /* Result */
-#resultTitle {
-  font-size: 32px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  color: transparent;
-}
-#badgeEarned {
-  font-size: 26px;
-  font-weight: bold;
-  color: var(--good);
+.badgeBig{font-size:20px;padding:10px;border-radius:10px;background:linear-gradient(90deg,var(--good),#4ef6d3);color:#001f1a;margin-top:8px}
+
+/* Leaderboard list */
+#leaderboardList{padding:10px}
+.lb-row{display:flex;justify-content:space-between;padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03);}
+
+/* Poster canvas hidden but preview might be shown later */
+#posterCanvas{display:none}
+
+/* Responsive */
+@media (max-width:720px){
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .question-text{font-size:18px}
+  .mode-btn{padding:14px}
 }
