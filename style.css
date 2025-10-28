@@ -1,101 +1,107 @@
-/* ===========================
-   CyberGuardian — style.css
-   Cyberpunk neon + glitch + art poster style
-=========================== */
-
-:root{
+:root {
   --bg:#04060d;
   --panel:#0b0e18;
   --fg:#e6f3ff;
-  --muted:#9aaec5;
+  --muted:#98a7b8;
   --primary:#00eaff;
   --accent:#ff48e8;
   --good:#7CFFDB;
   --bad:#FF5F6D;
   --glow:0 0 14px rgba(0,234,255,0.55),0 0 32px rgba(255,72,232,0.28);
-  --glass: rgba(255,255,255,0.03);
 }
 *{box-sizing:border-box}
-html,body{height:100%}
-body{
+body {
   margin:0;
-  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  color:var(--fg);
+  font-family:"Inter",Arial,Helvetica,sans-serif;
   background:var(--bg);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+  color:var(--fg);
   overflow-x:hidden;
 }
 
-/* Background canvas sits behind everything */
-#bg-art{position:fixed;inset:0;z-index:-2;filter:blur(2px)}
-
-/* Layout */
-.wrap{max-width:1100px;margin:0 auto;padding:18px}
-.row{display:flex;gap:8px;align-items:center}
-.row.between{justify-content:space-between}
-.center{text-align:center}
-.muted{color:var(--muted)}
-.small{font-size:13px}
-.gap8{gap:8px}
-
-/* Header */
-header{position:sticky;top:0;backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(4,6,13,0.6), transparent)}
-h1{margin:0;font-size:18px}
-.cyber{background:linear-gradient(90deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-
-/* Buttons */
-.btn{padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--primary);cursor:pointer;box-shadow:var(--glow)}
-.btn:hover{filter:brightness(1.15)}
-.btn.secondary{border-color:var(--accent);color:var(--accent)}
-.btn.ghost{background:transparent;box-shadow:none;border:1px dashed rgba(255,255,255,0.04);color:var(--muted)}
-
-/* Menu grid */
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
-.mode-btn{padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg,rgba(11,14,25,0.6),rgba(8,10,18,0.6));font-weight:600;cursor:pointer;box-shadow:var(--glow)}
-
-/* Card */
-.card{background:linear-gradient(180deg,var(--panel),rgba(11,14,25,0.9));border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.06);box-shadow:var(--glow)}
-.question-text{font-size:20px;font-weight:600}
-
-/* Answers */
-.answers{margin-top:16px;display:flex;flex-direction:column;gap:12px}
-.answers button{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.2);text-align:left}
-
-/* Glitch effect */
-.glitch-card{animation:glitch 4s infinite}
-@keyframes glitch{
-  0%{transform:none}
-  28%{transform:skewX(.6deg)}
-  56%{transform:skewX(-.6deg)}
-  100%{transform:none}
+#bg-art{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  filter:blur(4px);
 }
 
-/* Progress bar */
-.progress{height:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border-radius:999px;overflow:hidden;margin:12px 0}
-#progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .4s}
+/* Generic layout */
+.wrap{max-width:1100px;margin:auto;padding:22px}
+.row{display:flex;align-items:center}
+.row.between{justify-content:space-between}
+.center{text-align:center}
+.gap8{gap:8px}
+.muted{color:var(--muted)}
+
+/* Title gradient */
+.cyber{
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* Buttons */
+.btn {
+  padding:12px 18px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.05);
+  background:linear-gradient(180deg,rgba(11,14,25,0.8),rgba(6,8,16,0.9));
+  cursor:pointer;
+  color:var(--primary);
+  font-weight:600;
+  box-shadow:var(--glow);
+}
+.btn:hover{filter:brightness(1.15)}
+.btn.ghost{border:1px dashed rgba(255,255,255,0.09);box-shadow:none;color:var(--muted)}
+.btn.secondary{color:var(--accent);border-color:var(--accent)}
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;
+  margin-top:18px;
+}
+.mode-btn{padding:22px;font-size:18px}
+
+/* Cards */
+.card {
+  background:var(--panel);
+  padding:20px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:var(--glow);
+}
+
+/* Quiz */
+.question-text{font-size:22px;font-weight:700}
+.answers{display:flex;flex-direction:column;gap:12px;margin-top:18px}
 
 /* Spot the Phish */
-.spot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:12px}
-.spot-card{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+.spot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.spot-grid img{width:100%;border-radius:10px}
 
-/* Password forge */
-input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--fg);width:100%}
-.pwd-strength{margin-top:8px;font-weight:600}
+/* Strength meter */
+.pwd-strength{font-weight:600;margin-top:8px}
 
-/* Result */
-.badgeBig{font-size:20px;padding:10px;border-radius:10px;background:linear-gradient(90deg,var(--good),#4ef6d3);color:#001f1a;margin-top:8px}
+/* Poster badge */
+.badgeBig {
+  margin:16px auto;
+  padding:14px;
+  background:var(--good);
+  color:#001f1a;
+  border-radius:10px;
+  width:max-content;
+  font-size:22px;
+}
 
-/* Leaderboard list */
-#leaderboardList{padding:10px}
-.lb-row{display:flex;justify-content:space-between;padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03);}
-
-/* Poster canvas hidden but preview might be shown later */
-#posterCanvas{display:none}
-
-/* Responsive */
-@media (max-width:720px){
-  .menu-grid{grid-template-columns:repeat(2,1fr)}
-  .question-text{font-size:18px}
-  .mode-btn{padding:14px}
+/* Sound button */
+#soundToggle {
+  position:fixed;
+  bottom:16px;
+  right:16px;
+  border:2px solid var(--accent);
+  border-radius:50%;
+  padding:14px;
+  font-size:20px;
+  cursor:pointer;
 }
