@@ -32,6 +32,8 @@ body {
 .center{text-align:center}
 .gap8{gap:8px}
 .muted{color:var(--muted)}
+.tiny{font-size:12px}
+.small{font-size:13px}
 
 /* Title gradient */
 .cyber{
@@ -105,3 +107,8 @@ body {
   font-size:20px;
   cursor:pointer;
 }
+
+/* VS */
+.p2p-box textarea{width:100%; background:transparent; color:var(--fg); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:10px}
+.progress{height:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border-radius:999px;overflow:hidden;margin:12px 0}
+#vs-progress{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .4s}
