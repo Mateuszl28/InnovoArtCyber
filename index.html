@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Generative background canvas -->
+
+  <!-- Background generative art canvas -->
   <canvas id="bg-art"></canvas>
 
   <header>
@@ -21,10 +22,11 @@
   </header>
 
   <main class="wrap">
+
     <!-- MAIN MENU -->
     <section id="menu" class="screen center">
       <h2>Choose your mission</h2>
-      <p class="muted">Learn cyber security through play. Pick a mode and prove you're a Guardian.</p>
+      <p class="muted">Learn cyber security through interactive art & gameplay.</p>
 
       <div class="menu-grid">
         <button data-mode="quiz" class="mode-btn">🎯 Classic Quiz</button>
@@ -35,11 +37,11 @@
       </div>
     </section>
 
-    <!-- GAME SCREEN (shared for quiz/story) -->
+    <!-- QUIZ GAME -->
     <section id="screen-game" class="screen" hidden>
       <div class="row between">
         <div class="stat small">Mode: <span id="gameModeLabel"></span></div>
-        <div class="row small gap8">
+        <div class="row tiny gap8">
           <div class="stat small">Score: <span id="scoreDisplay">0</span></div>
           <div class="stat small">Top: <span id="topDisplay">0</span></div>
         </div>
@@ -49,89 +51,82 @@
         <div id="progress-bar"></div>
       </div>
 
-      <div class="card question glitch-card">
+      <div class="card glitch-card">
         <div id="questionText" class="question-text"></div>
       </div>
 
       <div id="answers" class="answers"></div>
 
-      <div class="row between statBar">
+      <div class="row between">
         <span id="questionCounter"></span>
-        <div class="row gap8">
-          <button id="btn-skip" class="btn ghost">Skip</button>
-          <button id="btn-explain" class="btn ghost">Explain</button>
-        </div>
+        <button id="btn-skip" class="btn ghost">Skip</button>
       </div>
     </section>
 
     <!-- SPOT THE PHISH -->
     <section id="screen-spot" class="screen" hidden>
       <h2>Spot the Phish</h2>
-      <p class="muted">Choose the fake page or email.</p>
+      <p class="muted">Pick the fake webpage or email.</p>
       <div class="spot-grid" id="spotGrid"></div>
-      <div class="row gap8" style="margin-top:12px">
-        <button id="spot-next" class="btn">Next</button>
-        <button id="spot-exit" class="btn ghost">Exit</button>
-      </div>
+      <button id="spot-next" class="btn">Next</button>
+      <button id="spot-exit" class="btn ghost">Exit</button>
     </section>
 
     <!-- PASSWORD FORGE -->
     <section id="screen-forge" class="screen" hidden>
       <h2>Password Forge</h2>
-      <p class="muted">Build a strong password. Real-time strength meter.</p>
       <div class="card">
         <label>Type a password</label>
         <input id="pwdInput" placeholder="Start typing..." />
         <div id="pwdStrength" class="pwd-strength">Strength: —</div>
-        <p class="muted small">Tips: use length, mixed case, numbers, and symbols.</p>
-        <div class="row" style="margin-top:12px">
-          <button id="pwd-check" class="btn">Accept</button>
-          <button id="pwd-exit" class="btn ghost">Back</button>
-        </div>
+        <button id="pwd-check" class="btn">Accept</button>
+        <button id="pwd-exit" class="btn ghost">Back</button>
       </div>
     </section>
 
     <!-- STORY MODE -->
     <section id="screen-story" class="screen" hidden>
       <h2>Cyber Heist — Story Mode</h2>
-      <div class="card question">
+      <div class="card">
         <div id="storyText"></div>
       </div>
       <div id="storyChoices" class="answers"></div>
-      <div class="row gap8" style="margin-top:12px">
-        <button id="story-exit" class="btn ghost">Exit</button>
-      </div>
+      <button id="story-exit" class="btn ghost">Exit</button>
     </section>
 
-    <!-- RESULT / SUMMARY -->
+    <!-- RESULT -->
     <section id="screen-result" class="screen" hidden>
-      <h2 id="resultTitle">Your Result</h2>
+      <h2 id="resultTitle"></h2>
       <p id="resultDescription" class="muted"></p>
       <div id="badgeEarned" class="badgeBig"></div>
-      <div class="row gap8" style="margin-top:16px">
-        <button id="result-poster" class="btn">Generate Poster</button>
-        <button id="result-menu" class="btn ghost">Main Menu</button>
-        <button id="result-leaderboard" class="btn secondary">Submit Score</button>
-      </div>
+
+      <button id="result-poster" class="btn">Generate Poster</button>
+      <button id="result-menu" class="btn ghost">Main Menu</button>
+      <button id="result-leaderboard" class="btn secondary">Submit Score</button>
     </section>
 
     <!-- LEADERBOARD -->
     <section id="screen-leaderboard" class="screen" hidden>
       <h2>Leaderboard</h2>
       <div id="leaderboardList" class="card"></div>
-      <div class="row gap8" style="margin-top:12px">
-        <button id="lb-back" class="btn ghost">Back</button>
-        <button id="lb-clear" class="btn ghost">Clear Local</button>
-      </div>
+      <button id="lb-back" class="btn ghost">Back</button>
+      <button id="lb-clear" class="btn ghost">Clear local</button>
     </section>
 
-    <!-- POSTER DOWNLOAD (hidden canvas) -->
-    <canvas id="posterCanvas" width="1024" height="1024" style="display:none"></canvas>
+    <!-- Hidden poster canvas -->
+    <canvas id="posterCanvas" width="1024" height="1024"></canvas>
+
   </main>
 
-  <footer>
-    <small class="muted">© 2026 CyberGuardian — Hackathon Edition</small>
-  </footer>
+  <!-- AUDIO -->
+  <audio id="bgMusic" loop src="assets/audio/synthwave.mp3"></audio>
+  <audio id="sfxCorrect" src="assets/audio/correct.wav"></audio>
+  <audio id="sfxWrong" src="assets/audio/wrong.wav"></audio>
+
+  <button id="soundToggle">🔊</button>
+
+  <!-- PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script src="app.js"></script>
 </body>
