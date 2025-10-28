@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CyberGuardian 2026 — Hackathon Edition</title>
+  <meta name="theme-color" content="#04060d" />
+  <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,6 +19,7 @@
       <div class="row gap8">
         <button id="btn-leaderboard" class="btn ghost">🏆 Leaderboard</button>
         <button id="btn-poster" class="btn ghost">🖼️ Poster</button>
+        <button id="btn-install" class="btn secondary">⬇ Install App</button>
       </div>
     </div>
   </header>
@@ -33,7 +36,8 @@
         <button data-mode="spot" class="mode-btn">🕵️ Spot The Phish</button>
         <button data-mode="forge" class="mode-btn">🔐 Password Forge</button>
         <button data-mode="story" class="mode-btn">💾 Cyber Heist (Story)</button>
-        <button data-mode="practice" class="mode-btn accent">⚡ Marathon (8 Qs)</button>
+        <button data-mode="practice" class="mode-btn">⚡ Marathon (8 Qs)</button>
+        <button data-mode="vs" class="mode-btn accent">⚔ Multiplayer VS</button>
       </div>
     </section>
 
@@ -94,6 +98,56 @@
       <button id="story-exit" class="btn ghost">Exit</button>
     </section>
 
+    <!-- VS SETUP -->
+    <section id="screen-vs-setup" class="screen" hidden>
+      <h2>⚔ Multiplayer VS</h2>
+      <div class="card">
+        <p class="muted">Choose Local Hotseat or Peer-to-Peer (copy/paste signaling, no server required).</p>
+        <div class="row gap8">
+          <button id="vs-local" class="btn">🧑‍🤝‍🧑 Local Hotseat</button>
+          <button id="vs-p2p" class="btn secondary">🌐 P2P WebRTC</button>
+          <button id="vs-exit" class="btn ghost">Back</button>
+        </div>
+      </div>
+
+      <div id="vs-p2p-setup" class="card" hidden>
+        <h3>P2P Setup</h3>
+        <div class="row gap8">
+          <button id="vs-host" class="btn">I am Host</button>
+          <button id="vs-guest" class="btn">I am Guest</button>
+        </div>
+        <div id="vs-host-box" class="p2p-box" hidden>
+          <label>Your Offer (copy & send)</label>
+          <textarea id="vs-offer" rows="6"></textarea>
+          <label>Paste Guest Answer</label>
+          <textarea id="vs-answer" rows="6" placeholder="Paste answer here"></textarea>
+          <button id="vs-accept" class="btn">Accept Answer & Start</button>
+        </div>
+        <div id="vs-guest-box" class="p2p-box" hidden>
+          <label>Paste Host Offer</label>
+          <textarea id="vs-remote-offer" rows="6"></textarea>
+          <button id="vs-gen-answer" class="btn">Generate Answer</button>
+          <label>Your Answer (copy & send)</label>
+          <textarea id="vs-guest-answer" rows="6"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- VS GAME -->
+    <section id="screen-vs" class="screen" hidden>
+      <h2>VS Battle</h2>
+      <div class="row between">
+        <div class="stat">P1: <span id="vs-p1">0</span></div>
+        <div class="stat">P2: <span id="vs-p2">0</span></div>
+      </div>
+      <div class="progress"><div id="vs-progress"></div></div>
+      <div class="card">
+        <div id="vs-question" class="question-text"></div>
+      </div>
+      <div id="vs-answers" class="answers"></div>
+      <button id="vs-end" class="btn ghost">End Match</button>
+    </section>
+
     <!-- RESULT -->
     <section id="screen-result" class="screen" hidden>
       <h2 id="resultTitle"></h2>
@@ -129,5 +183,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script src="app.js"></script>
+  <script>
+    // PWA registration
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(console.warn);
+      });
+    }
+  </script>
 </body>
 </html>
