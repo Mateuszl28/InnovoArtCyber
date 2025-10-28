@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CyberGuardian 2026 — Gra Cyber Security</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="wrap row between">
+    <h1>🛡️ <span class="cyber">CyberGuardian 2026</span></h1>
+    <button id="toggleLang" class="btn ghost">EN</button>
+  </div>
+</header>
+
+<main class="wrap center">
+
+  <!-- Ekran startowy -->
+  <section id="screen-start" class="screen">
+    <h2>Witaj w cyber-grze!</h2>
+    <p>Sprawdź, czy rozpoznasz cyberzagrożenia i podejmiesz właściwe decyzje.</p>
+    <button id="startBtn" class="btn">▶ Start gry</button>
+  </section>
+
+  <!-- Ekran gry -->
+  <section id="screen-game" class="screen" hidden>
+    <div class="card question">
+      <div id="questionText" class="question-text"></div>
+    </div>
+    <div id="answers" class="answers"></div>
+    <div class="row between statBar">
+      <span id="questionCounter"></span>
+      <span id="scoreDisplay"></span>
+    </div>
+  </section>
+
+  <!-- Ekran wyniku -->
+  <section id="screen-result" class="screen" hidden>
+    <h2 id="resultTitle">Wynik gry</h2>
+    <p id="resultDescription"></p>
+    <button id="againBtn" class="btn secondary">🔄 Zagraj ponownie</button>
+  </section>
+
+</main>
+
+<footer>
+  <small class="muted">© 2026 CyberGuardian — edukacyjna gra cyber-security</small>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
