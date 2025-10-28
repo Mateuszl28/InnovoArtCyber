@@ -3,62 +3,136 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CyberGuardian 2026 — CyberSecurity Game</title>
+  <title>CyberGuardian 2026 — Hackathon Edition</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Generative background canvas -->
+  <canvas id="bg-art"></canvas>
 
-<canvas id="bg-art"></canvas>
-
-<header>
-  <div class="wrap row between">
-    <h1>🛡️ <span class="cyber">CyberGuardian 2026</span></h1>
-  </div>
-</header>
-
-<main class="wrap center">
-
-  <!-- START SCREEN -->
-  <section id="screen-start" class="screen fade-in">
-    <h2>Welcome, future Guardian.</h2>
-    <p>You will face real cyber-threat situations.  
-      Choose wisely. Every decision shapes your profile.</p>
-    <button id="startBtn" class="btn">▶ Start Game</button>
-  </section>
-
-  <!-- GAME SCREEN -->
-  <section id="screen-game" class="screen" hidden>
-    <div class="progress">
-      <div id="progress-bar"></div>
+  <header>
+    <div class="wrap row between">
+      <h1>🛡️ <span class="cyber">CyberGuardian 2026</span></h1>
+      <div class="row gap8">
+        <button id="btn-leaderboard" class="btn ghost">🏆 Leaderboard</button>
+        <button id="btn-poster" class="btn ghost">🖼️ Poster</button>
+      </div>
     </div>
+  </header>
 
-    <div class="card question glitch-card">
-      <div id="questionText" class="question-text"></div>
-    </div>
+  <main class="wrap">
+    <!-- MAIN MENU -->
+    <section id="menu" class="screen center">
+      <h2>Choose your mission</h2>
+      <p class="muted">Learn cyber security through play. Pick a mode and prove you're a Guardian.</p>
 
-    <div id="answers" class="answers"></div>
+      <div class="menu-grid">
+        <button data-mode="quiz" class="mode-btn">🎯 Classic Quiz</button>
+        <button data-mode="spot" class="mode-btn">🕵️ Spot The Phish</button>
+        <button data-mode="forge" class="mode-btn">🔐 Password Forge</button>
+        <button data-mode="story" class="mode-btn">💾 Cyber Heist (Story)</button>
+        <button data-mode="practice" class="mode-btn accent">⚡ Marathon (8 Qs)</button>
+      </div>
+    </section>
 
-    <div class="row between statBar">
-      <span id="questionCounter"></span>
-      <span id="scoreDisplay"></span>
-    </div>
-  </section>
+    <!-- GAME SCREEN (shared for quiz/story) -->
+    <section id="screen-game" class="screen" hidden>
+      <div class="row between">
+        <div class="stat small">Mode: <span id="gameModeLabel"></span></div>
+        <div class="row small gap8">
+          <div class="stat small">Score: <span id="scoreDisplay">0</span></div>
+          <div class="stat small">Top: <span id="topDisplay">0</span></div>
+        </div>
+      </div>
 
-  <!-- RESULT SCREEN -->
-  <section id="screen-result" class="screen" hidden>
-    <h2 id="resultTitle"></h2>
-    <p id="resultDescription"></p>
-    <h3 id="badgeEarned"></h3>
+      <div class="progress">
+        <div id="progress-bar"></div>
+      </div>
 
-    <button id="againBtn" class="btn secondary">🔄 Play again</button>
-  </section>
+      <div class="card question glitch-card">
+        <div id="questionText" class="question-text"></div>
+      </div>
 
-</main>
+      <div id="answers" class="answers"></div>
 
-<footer>
-  <small class="muted">© 2026 CyberGuardian — AI Enhanced Education Game</small>
-</footer>
+      <div class="row between statBar">
+        <span id="questionCounter"></span>
+        <div class="row gap8">
+          <button id="btn-skip" class="btn ghost">Skip</button>
+          <button id="btn-explain" class="btn ghost">Explain</button>
+        </div>
+      </div>
+    </section>
 
-<script src="app.js"></script>
+    <!-- SPOT THE PHISH -->
+    <section id="screen-spot" class="screen" hidden>
+      <h2>Spot the Phish</h2>
+      <p class="muted">Choose the fake page or email.</p>
+      <div class="spot-grid" id="spotGrid"></div>
+      <div class="row gap8" style="margin-top:12px">
+        <button id="spot-next" class="btn">Next</button>
+        <button id="spot-exit" class="btn ghost">Exit</button>
+      </div>
+    </section>
+
+    <!-- PASSWORD FORGE -->
+    <section id="screen-forge" class="screen" hidden>
+      <h2>Password Forge</h2>
+      <p class="muted">Build a strong password. Real-time strength meter.</p>
+      <div class="card">
+        <label>Type a password</label>
+        <input id="pwdInput" placeholder="Start typing..." />
+        <div id="pwdStrength" class="pwd-strength">Strength: —</div>
+        <p class="muted small">Tips: use length, mixed case, numbers, and symbols.</p>
+        <div class="row" style="margin-top:12px">
+          <button id="pwd-check" class="btn">Accept</button>
+          <button id="pwd-exit" class="btn ghost">Back</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY MODE -->
+    <section id="screen-story" class="screen" hidden>
+      <h2>Cyber Heist — Story Mode</h2>
+      <div class="card question">
+        <div id="storyText"></div>
+      </div>
+      <div id="storyChoices" class="answers"></div>
+      <div class="row gap8" style="margin-top:12px">
+        <button id="story-exit" class="btn ghost">Exit</button>
+      </div>
+    </section>
+
+    <!-- RESULT / SUMMARY -->
+    <section id="screen-result" class="screen" hidden>
+      <h2 id="resultTitle">Your Result</h2>
+      <p id="resultDescription" class="muted"></p>
+      <div id="badgeEarned" class="badgeBig"></div>
+      <div class="row gap8" style="margin-top:16px">
+        <button id="result-poster" class="btn">Generate Poster</button>
+        <button id="result-menu" class="btn ghost">Main Menu</button>
+        <button id="result-leaderboard" class="btn secondary">Submit Score</button>
+      </div>
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section id="screen-leaderboard" class="screen" hidden>
+      <h2>Leaderboard</h2>
+      <div id="leaderboardList" class="card"></div>
+      <div class="row gap8" style="margin-top:12px">
+        <button id="lb-back" class="btn ghost">Back</button>
+        <button id="lb-clear" class="btn ghost">Clear Local</button>
+      </div>
+    </section>
+
+    <!-- POSTER DOWNLOAD (hidden canvas) -->
+    <canvas id="posterCanvas" width="1024" height="1024" style="display:none"></canvas>
+  </main>
+
+  <footer>
+    <small class="muted">© 2026 CyberGuardian — Hackathon Edition</small>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
